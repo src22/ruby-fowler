@@ -52,7 +52,7 @@ class Computer
 
   def to_s
     result = "Computer:"
-    result << " " + @processor.to_s
+    result << "" + @processor.to_s
     result << " | "
 
     @disks.each do |i|
@@ -67,10 +67,10 @@ end
 c = Computer.new(p, [d1,d2] )
 puts "hello... " + c.to_s
 
-expected_text = "[Computer: "
-+"[Processor: core 64 | speed 10000 ] | "
-+", [Disk: size 50 | speed 7200 ],"
-+" [Disk: size 60 | speed 7210 ] ]"
+$expected_text = "[Computer:"+
+"[Processor: core 64 | speed 10000 ] | "+
+", [Disk: size 50 | speed 7200 ],"+
+" [Disk: size 60 | speed 7210 ] ]"
 
 
 # --- end ---
