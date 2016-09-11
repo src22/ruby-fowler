@@ -29,8 +29,7 @@ class TestFowler2 < Test::Unit::TestCase
 
   def test_simple_create
 
-    b = BasicComputerBuilder.new
-    c = b.buildTheComputer()
+    c = BasicComputerBuilder.new.buildTheComputer()
 
     assert_equal( $expected_func_seq_computer, c.to_s)
 
