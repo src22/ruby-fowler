@@ -2,6 +2,13 @@ require 'test/unit'
 require_relative 'model'
 require_relative 'simple_builder'
 
+
+$expected_text = "[Computer:"+
+"[Processor: core 64 | speed 10000 ] | "+
+", [Disk: size 50 | speed 7200 ],"+
+" [Disk: size 60 | speed 7210 ] ]"
+
+
 class TestFowler1 < Test::Unit::TestCase
 
   def test_simple_create
