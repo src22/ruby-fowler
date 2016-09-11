@@ -27,7 +27,7 @@ $expected_func_seq_computer = "[Computer:"+
 
 class TestFowler2 < Test::Unit::TestCase
 
-  def test_simple_create
+  def test_func_seq
 
     c = BasicComputerBuilder.new.buildTheComputer()
 
