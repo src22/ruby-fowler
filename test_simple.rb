@@ -1,6 +1,6 @@
 require 'test/unit'
 require_relative 'model'
-require_relative 'builder'
+require_relative 'simple_builder'
 
 class TestFowler1 < Test::Unit::TestCase
 

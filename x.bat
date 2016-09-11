@@ -3,7 +3,7 @@ cls
 echo .
 echo .
 
-ruby test.rb
+ruby test_simple.rb
 
 echo .
 echo .
