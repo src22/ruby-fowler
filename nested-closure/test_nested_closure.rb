@@ -31,7 +31,7 @@ $expected_nested_computer = "[Computer:"+
 
 class TestFowler3 < Test::Unit::TestCase
 
-  def test_simple_create
+  def test_nested_closure
 
     c = ConcreteNestedClosureBuilder.new.buildTheComputer()
 

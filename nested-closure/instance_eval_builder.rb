@@ -3,8 +3,6 @@ require_relative 'model'
 class InstanceEvalBuilder
   def initialize
     @comp = Computer.new
-    @lastProc
-    @diskArray = []
   end
   # static -----------------------------------------------
   def self.build &block
