@@ -48,7 +48,7 @@ class Promotion
   end
   def trace
     puts "@rules.length = " + @rules.length.to_s
-    puts "@rules.info = " + @rules[0].info
+    @rules.each { |r| r.trace }
   end
 end
 
@@ -63,8 +63,11 @@ class PromotionRule
   def score_of anItinerary
     return (@conditions.all?{|c| c.match(anItinerary)}) ? @score : 0
   end
-  def info
-    return "score = " + @score.to_s + "  @conditions.length = " + @conditions.length.to_s
+  def trace
+    puts "== ========================== " 
+    puts "== PromotionRule   == score = " + @score.to_s
+    puts "==    conditions   == " + @conditions.length.to_s
+    @conditions.each { |c| c.trace }
   end
 end
 
@@ -79,6 +82,11 @@ class EqualityCondition
     return false unless anItem.respond_to?(@attribute)
     return @value == anItem.send(@attribute)
   end
+  def trace
+    puts "----------------------------------------"
+    puts "-- attribute = " + @attribute.to_s
+    puts "--     value = " + @value.to_s
+  end
 end
 
 class AtLeastCondition
@@ -92,6 +100,12 @@ class AtLeastCondition
     return false unless anItem.respond_to?(@attribute)
     return @value <= anItem.send(@attribute)
   end
+  def trace
+    puts "----------------------------------------"
+    puts "-- attribute = " + @attribute.to_s
+    puts "--     value = " + @value.to_s
+  end
+
 end
 
 class BlockCondition
@@ -104,4 +118,9 @@ class BlockCondition
     puts "The value of the match: " + value.to_s
     return value
   end
+  def trace
+    puts "----------------------------------------"
+    puts "-- @aBlock = " + @@aBlock.to_s
+  end
+
 end

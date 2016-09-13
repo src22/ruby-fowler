@@ -1,4 +1,3 @@
 
-puts "hello"
-match = /^when_(\w*)/.match("XXwhen_alma")
-puts "match: " + match.captures.last
+
+puts "_30".slice(1..-1).to_i

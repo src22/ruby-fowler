@@ -21,18 +21,36 @@ class TestChain < Test::Unit::TestCase
     builder = TheBigBuilder.new
     builder.score(170).when.from.equals.BOS.and.nights.at.least._3
     p = builder.content
-    puts "INFO "
-    puts "INFO "
-    puts "INFO "
+
     p.trace
-    puts p.score_of( @i ).to_s
-    # assert_equal 170, p.score_of( @i )
+    assert_equal 170, p.score_of( @i )
   end
   def test_chain_at_least__false
     builder = TheBigBuilder.new
+    builder.score(170).when.nights.at.least._30
+    p = builder.content
+    assert_equal 0, p.score_of( @i )
+  end
+  def test_chain_at_least_and_more__false
+    builder = TheBigBuilder.new
     builder.score(170).when.from.equals.BOS.and.nights.at.least._30
     p = builder.content
+    assert_equal 0, p.score_of( @i )
+  end
+  def test_chain_at_least_and_more__true
+    builder = TheBigBuilder.new
+    builder.score(170).when.from.equals.BOS.and.nights.at.least.ZERO
+    p = builder.content
     assert_equal 170, p.score_of( @i )
+  end
+  def test_zero_not_allowed
+    # -----------------------------------------
+    puts "NA NEEEE"
+    assert_raise do
+      builder = TheBigBuilder.new
+      builder.score(170).when.from.equals.BOS.and.nights.at.least._00
+    end
+    puts "NA NEEEE"
   end
 
 end

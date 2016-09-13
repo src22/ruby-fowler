@@ -22,7 +22,7 @@ class TheBigBuilder
   end
 end
 
-class BuilderAA
+class Builder
   attr_accessor :content, :parent
   def initialize parentBuilder = nil
     @parent = parentBuilder
@@ -30,7 +30,7 @@ class BuilderAA
 end
 
 # in the book: PrmotionConditionBuilder
-class TheLittleBuilder < BuilderAA
+class TheLittleBuilder < Builder
   attr_accessor :nameChild, :operatorChild, :valueChild
 
   def finish_the_condition
@@ -41,7 +41,7 @@ class TheLittleBuilder < BuilderAA
 end
 
 # .... [[from]] equals BOS
-class ConditionAttributeNameBuilder < BuilderAA
+class ConditionAttributeNameBuilder < Builder
   def initialize parent
     @parent = TheLittleBuilder.new(parent)
     @parent.nameChild = self
@@ -53,7 +53,7 @@ class ConditionAttributeNameBuilder < BuilderAA
 end
 
 # .... from {{equals}} BOS
-class ConditionOperationBuilder < BuilderAA
+class ConditionOperationBuilder < Builder
   def initialize parent
     super
     @parent.operatorChild = self
@@ -80,14 +80,16 @@ end
 
 
 # .... from equals <<BOS>>
-class ConditionValueBuilder < BuilderAA
+class ConditionValueBuilder < Builder
   def initialize parent
     super
     @parent.valueChild = self
   end
   def method_missing method_id, *args
     @content = method_id.to_s
-    @content = @content.to_i  if  @content =~ /^_\d+$/   # if it is number, like _12
+    @content = @content.slice(1..-1).to_i  if  @content =~ /^_\d+$/   # if it is number, like _12
+    throw "Something is wrong...-use ZERO instead..." if (@content == 0)
+    @content = 0 if (@content == "ZERO")
 
     @parent.finish_the_condition
   end
