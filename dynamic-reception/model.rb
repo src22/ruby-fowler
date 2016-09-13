@@ -46,6 +46,10 @@ class Promotion
   def score_of anItinerary
     return @rules.inject(0) {|sum,r| sum += r.score_of(anItinerary)}
   end
+  def trace
+    puts "@rules.length = " + @rules.length.to_s
+    puts "@rules.info = " + @rules[0].info
+  end
 end
 
 class PromotionRule
@@ -59,6 +63,9 @@ class PromotionRule
   def score_of anItinerary
     return (@conditions.all?{|c| c.match(anItinerary)}) ? @score : 0
   end
+  def info
+    return "score = " + @score.to_s + "  @conditions.length = " + @conditions.length.to_s
+  end
 end
 
 class EqualityCondition
@@ -71,6 +78,19 @@ class EqualityCondition
   def match_item anItem
     return false unless anItem.respond_to?(@attribute)
     return @value == anItem.send(@attribute)
+  end
+end
+
+class AtLeastCondition
+  def initialize aSymbol, value
+    @attribute, @value = aSymbol, value
+  end
+  def match anItinerary
+    return anItinerary.items.any?{|i| match_item i}
+  end
+  def match_item anItem
+    return false unless anItem.respond_to?(@attribute)
+    return @value <= anItem.send(@attribute)
   end
 end
 
