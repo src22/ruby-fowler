@@ -8,7 +8,7 @@ Dynamic Reception (430)
 
 
 --------------------------------------------
-# Philosophical questions about management
+### Philosophical questions about management
 
 How to write good documentation of something?
 
