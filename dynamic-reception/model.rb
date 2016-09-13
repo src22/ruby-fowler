@@ -18,7 +18,7 @@ class Flight
     @airline, @from, @to = airline, from, to
   end
   def to_s
-    return  "Flight: " + @airline + " " + @from + " " + @to + "  " 
+    return  "[Flight: " + @airline + " " + @from + " " + @to + "]"
   end
 end
 
@@ -30,5 +30,3 @@ class Hotel
 end
 
 # ----------------------------
-f = Flight.new "Aaa", "1aa", "2bb"
-puts "hello... " + f.to_s
