@@ -4,7 +4,7 @@ echo .
 echo .
 echo .
 
-ruby test_chain.rb
+ruby test_main.rb
 
 echo .
 echo .
