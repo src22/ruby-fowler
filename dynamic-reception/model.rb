@@ -1,8 +1,8 @@
 
 
 class Itinerary
-  def initialize
-    @items = []
+  def initialize items = []
+    @items = items
   end
   def << arg
     @items << arg
@@ -27,6 +27,61 @@ class Hotel
   def initialize brand, nights
     @brand, @nights = brand, nights
   end
+  def to_s
+    return  "[Hotel: " + @brand + " " + @nights.to_s + "]"
+  end
 end
 
-# ----------------------------
+
+
+
+# ---------------------------------------------------------------------
+
+
+
+class Promotion
+  def initialize rules
+    @rules = rules
+  end
+  def score_of anItinerary
+    return @rules.inject(0) {|sum,r| r.score_of(anItinerary)}
+  end
+end
+
+class PromotionRule
+  def initialize anInteger
+    @score = anInteger
+    @conditions = []
+  end
+  def add_condition aPromotionCondition
+    @conditions << aPromotionCondition
+  end
+  def score_of anItinerary
+    return (@conditions.all?{|c| c.match(anItinerary)}) ? @score : 0
+  end
+end
+
+class EqualityCondition
+  def initialize aSymbol, value
+    @attribute, @value = aSymbol, value
+  end
+  def match anItinerary
+    return anItinerary.items.any?{|i| match_item i}
+  end
+  def match_item anItem
+    return false unless anItem.respond_to?(@attribute)
+    return @value == anItem.send(@attribute)
+  end
+end
+
+class BlockCondition
+  def initialize &aBlock
+    @aBlock = aBlock
+  end
+  def match anItinerary
+    puts "calling match..."
+    value = @aBlock.call ( anItinerary )
+    puts "The value of the match: " + value.to_s
+    return value
+  end
+end
