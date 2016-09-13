@@ -87,6 +87,8 @@ class ConditionValueBuilder < Builder
   end
   def method_missing method_id, *args
     @content = method_id.to_s
+    
+    # Fowlers version did not work for me....
     @content = @content.slice(1..-1).to_i  if  @content =~ /^_\d+$/   # if it is number, like _12
     throw "Something is wrong...-use ZERO instead..." if (@content == 0)
     @content = 0 if (@content == "ZERO")
