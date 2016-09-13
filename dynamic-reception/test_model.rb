@@ -27,8 +27,9 @@ class TestDynamicReception < Test::Unit::TestCase
     assert_true c.match("something")
   end
   # VERY STRANGE BEHAVIOUR FROM RUBY
-  # and dont not ever writes the result value
-  # just returns back but gives back TRUE
+  # and did not even write the result value
+  # in the method BlockCondition.match...
+  # just returns back from there but gives back TRUE...
   def test_flexible_rule_false_STRANGE
     c = BlockCondition.new { return false }
     assert_true c.match("something")

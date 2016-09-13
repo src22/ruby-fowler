@@ -44,7 +44,7 @@ class Promotion
     @rules = rules
   end
   def score_of anItinerary
-    return @rules.inject(0) {|sum,r| r.score_of(anItinerary)}
+    return @rules.inject(0) {|sum,r| sum += r.score_of(anItinerary)}
   end
 end
 
